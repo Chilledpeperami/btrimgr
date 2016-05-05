@@ -1,7 +1,7 @@
 "use strict";
 
-window.onload();
+window.onload = setupPage();
 
 function setupPage(){
-    Window.alert("Hello world, again.");
+    window.alert("Hello world, again.");
 }
