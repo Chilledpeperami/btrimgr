@@ -1,0 +1,36 @@
+Album:
+id
+title
+description
+datetime
+cover
+cover_width
+cover_height
+account_url
+account_id
+privacy
+layout
+views
+links
+favorite
+nsfw
+images_count
+images
+
+Image:
+id
+title
+description
+datetime
+type
+animated
+width
+height
+size
+views
+bandwidth
+link
+gifv (only available if image is animated and image/gif)
+mp4  (only available if image is animated and image/gif)
+webm (only available if image is animated and image/gif)
+looping (boolean)

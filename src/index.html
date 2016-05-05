@@ -1,43 +1,53 @@
 <!DOCTYPE html>
 
-<title>btrimgr</title>
+<html>
+    <head>
+        <title>btrimgr</title>
+    </head>
 
-<table style="height:100%; width:100%; position:absolute; top:0; bottom:0; left:0; right:0;">
-    <tr>
-        <td style="height:100%;">
-            <img src="./img/leftArrow.svg" style="width:100%;"></img>
-        </td>
-        
-        <td style="width:90%;height:100%;" id="imageHolderWidth">
-            <table>
-                <tr style="height:5vh; width=100%">
-                    <td>
-                        <h1 id="title">
-                            My FreeNAS server, Zippy.
-                        </h1>
-                    </td>
-                </tr>
-                <tr style="height:72vh; width=100%" id="imageHolderHeight">
-                    <td>
-                        <img id="imageDisplay" style="display:flex;justify-content:center;align-items:center;"></img>
-                    </td>
-                </tr>
-                <tr style="height:17vh; width=100%">
-                    <td>
-                        <p id="description">
-                        </p>
-                    </td>
-                </tr>
-                <tr><td></td></tr>
-            </table>
-        </td>
-        
-        <td style="height:100%;">
-            <img src="./img/rightArrow.svg" style="width:100%;"></img>
-        </td>
-    </tr>
-</table>
+    <body onkeydown="manageKeyEvent(event);">
+        <table style="height:100%; width:100%; position:absolute; top:0; bottom:0; left:0; right:0;">
+            <tr>
+                <td style="height:100%;" onclick="presentImage(0);">
+                    <img src="./img/leftArrow.svg" style="width:100%;"></img>
+                </td>
 
-<link rel="stylesheet" type="text/css" href="c.css">
-<script src="./j.js"></script>
-<script src="./lib/jquery.js"></script>
+                <td style="width:90%;height:100%;" id="imageHolderWidth">
+                    <table>
+                        <tr style="height:5vh; width=100%">
+                            <td>
+                                <h1 id="albumTitle" style="display:block;">
+                                    My FreeNAS server, Zippy.
+                                </h1>
+                                <h2 id="imageTitle" style="display:none;">
+                                    This is the description of the album.
+                                </h2>
+                            </td>
+                        </tr>
+                        <tr style="height:72vh; width=100%" id="imageHolderHeight">
+                            <td>
+                                <img id="imageDisplay" style="display:flex;justify-content:center;align-items:center;"></img>
+                            </td>
+                        </tr>
+                        <tr style="height:17vh; width=100%">
+                            <td>
+                                <p id="description">
+                                </p>
+                            </td>
+                        </tr>
+                        <tr><td></td></tr>
+                    </table>
+                </td>
+
+                <td style="height:100%;" onclick="presentImage(1);">
+                    <img src="./img/rightArrow.svg" style="width:100%;"></img>
+                </td>
+            </tr>
+        </table>
+    </body>
+
+    <link rel="stylesheet" type="text/css" href="c.css">
+    <script src="./j.js"></script>
+    <script src="./lib/jquery.js"></script>
+
+</html>

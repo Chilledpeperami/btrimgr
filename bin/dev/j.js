@@ -2,10 +2,41 @@
 var apiClientIds = ["82f991a3e8e7949"];
 var loadingImageURI = "./img/loading.gif";
 
+var album = {
+    title: "My FreeNAS server, Zippy.",
+    description: "This is the description of the album.",
+    images:[
+        {
+            title: "Cables",
+            description: "This is the desctption for the cables",
+            link: "./img/1573.png"
+        },
+        {
+            title: "Hard-Drives",
+            description: "This is the description for the hard-drives.",
+            link: "./img/panorama.jpg"
+        }
+        
+    ]
+};
+
+var images = [document.createElement("IMG")];
+
+//Performs ajax to get album
 function getAlbum(albumId){}
 
 function getApiClientId(){
     return apiClientIds[Math.floor(Math.random() / (1 / apiClientIds.length))];
+}
+
+function presentImage(direction){
+    if(direction == 0){
+        //Load previous image.
+        console.log("Presenting previous image."); 
+    }else if(direction == 1){
+        //Load next image.
+        console.log("Presenting next image.");   
+    }
 }
 
 function setupImage(imageURI){
@@ -25,6 +56,17 @@ function setupImage(imageURI){
         }
         document.getElementById("imageDisplay").src = this.src;
     };
+}
+
+function manageKeyEvent(eventIn){
+    if(eventIn.keyCode == 37){
+        //Do stuff when left key is pressed.
+        presentImage(0);
+    }else if(eventIn.keyCode == 39){
+        //Do stuff when right key is pressed.
+        presentImage(1);
+    }
+    
 }
 
 function setupPage(){
