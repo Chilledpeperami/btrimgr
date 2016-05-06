@@ -6,6 +6,9 @@ var album;
 var images = [];
 var currentImage = -1;
 
+var imageWidth;
+var imageHeight;
+
 //Performs ajax to get album
 function getAlbum(albumId){
     return $.ajax(
@@ -55,8 +58,6 @@ function presentImage(){
     }
 }
 
-
-
 function setupImage(imageURI){
     document.getElementById("imageDisplay").src = loadingImageURI;
     document.getElementById("imageDisplay").width = "100";
@@ -65,14 +66,8 @@ function setupImage(imageURI){
     var image = document.createElement("IMG");
     image.setAttribute("src", imageURI);
     image.onload = function (){
-        if(this.naturalWidth > this.naturalHeight){
-            document.getElementById("imageDisplay").width = document.getElementById("imageHolderWidth").offsetWidth;
-            document.getElementById("imageDisplay").style.height = "auto";
-        }else{
-            document.getElementById("imageDisplay").height = document.getElementById("imageHolderHeight").offsetHeight;
-            document.getElementById("imageDisplay").style.width = "auto";
-        }
         document.getElementById("imageDisplay").src = this.src;
+        resizeImage();
     };
 }
 
@@ -87,8 +82,40 @@ function manageKeyEvent(eventIn){
     
 }
 
+function resizeImage(){
+    imageHeight = document.getElementById("imageHolderHeight").offsetHeight;
+    imageWidth = document.getElementById("imageHolderWidth").offsetWidth;
+    
+    var imageDisplay = document.getElementById("imageDisplay");
+    
+    
+    var limitByWidth;
+    
+    if(imageDisplay.naturalWidth > imageDisplay.naturalHeight){
+        if((imageWidth) * (imageDisplay.naturalHeight/imageDisplay.naturalWidth) > imageHeight){
+            limitByWidth=false;
+        }else{
+            limitByWidth=true;
+        }
+    }else{
+        if((imageHeight) * (imageDisplay.naturalWidth/imageDisplay.naturalHeight) > imageWidth){
+            limitByWidth=true;
+        }else{
+            limitByWidth=false;
+        }
+    }
+    
+    if(limitByWidth){
+        imageDisplay.width = imageWidth;
+        imageDisplay.height = (imageWidth) * (imageDisplay.naturalHeight/imageDisplay.naturalWidth);
+    }else{
+        imageDisplay.height = imageHeight;
+        imageDisplay.width = (imageHeight) * (imageDisplay.naturalWidth/imageDisplay.naturalHeight);
+    }
+}
+
 function setupPage(){
-    var deferredAlbum = getAlbum("RaZPU");
+    var deferredAlbum = getAlbum("p0Cdu");
     deferredAlbum.done(function(receivedAlbum){
         album = receivedAlbum.data;
         
