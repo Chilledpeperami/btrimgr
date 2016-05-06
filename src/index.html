@@ -8,7 +8,7 @@
     <body onkeydown="manageKeyEvent(event);">
         <table style="height:100%; width:100%; position:absolute; top:0; bottom:0; left:0; right:0;">
             <tr>
-                <td style="height:100%;" onclick="presentImage(0);">
+                <td style="height:100%;" onclick="setImageIndex(0);">
                     <img src="./img/leftArrow.svg" style="width:100%;"></img>
                 </td>
 
@@ -17,16 +17,16 @@
                         <tr style="height:5vh; width=100%">
                             <td>
                                 <h1 id="albumTitle" style="display:block;">
-                                    My FreeNAS server, Zippy.
+                                    Album Title.
                                 </h1>
                                 <h2 id="imageTitle" style="display:none;">
-                                    This is the description of the album.
+                                    Image Title.
                                 </h2>
                             </td>
                         </tr>
                         <tr style="height:72vh; width=100%" id="imageHolderHeight">
                             <td>
-                                <img id="imageDisplay" style="display:flex;justify-content:center;align-items:center;"></img>
+                                <img id="imageDisplay" src="./img/loading.gif" style="display:flex;justify-content:center;align-items:center;"></img>
                             </td>
                         </tr>
                         <tr style="height:17vh; width=100%">
@@ -39,7 +39,7 @@
                     </table>
                 </td>
 
-                <td style="height:100%;" onclick="presentImage(1);">
+                <td style="height:100%;" onclick="setImageIndex(1);">
                     <img src="./img/rightArrow.svg" style="width:100%;"></img>
                 </td>
             </tr>
@@ -47,7 +47,7 @@
     </body>
 
     <link rel="stylesheet" type="text/css" href="c.css">
-    <script src="./j.js"></script>
     <script src="./lib/jquery.js"></script>
+    <script src="./j.js"></script>
 
 </html>
