@@ -36,25 +36,39 @@ function setImageIndex(direction){
             currentImage -= 1;
         }
     }else if(direction == 1){
-        if(currentImage >= album.images.length){
+        
+    }else if(direction == 2){
+        if(currentImage >= album.images.length - 1){
             return;
         }else{
             currentImage += 1;
         }
     }
+    
+    setArrows();
     presentImage();
+}
+
+function setArrows(){
+    if(currentImage == -1){
+        document.getElementById("leftArrowImage").src = "./img/leftArrowDisabled.svg";
+    }else if (currentImage >= album.images.length - 1){
+        document.getElementById("rightArrowImage").src = "./img/rightArrowDisabled.svg";
+    }else{
+        document.getElementById("leftArrowImage").src = "./img/leftArrow.svg";
+        document.getElementById("rightArrowImage").src = "./img/rightArrow.svg";
+    }
 }
 
 function presentImage(){
     if(currentImage == -1){
-        
+        setupImage("http://i.imgur.com/" + album.cover + "h.png");
+        document.getElementById("title").innerHTML = album.title;
+        document.getElementById("description").innerHTML = album.description;
     }else{
         setupImage(album.images[currentImage].link);
-        document.getElementById("imageTitle").innerHTML =   album.images[currentImage].title;
-        document.getElementById("description").innerHTML =   album.images[currentImage].description;
-        
-        document.getElementById("albumTitle").display = "none";
-        document.getElementById("imageTitle").display = "block";
+        document.getElementById("title").innerHTML = album.images[currentImage].title;
+        document.getElementById("description").innerHTML = album.images[currentImage].description;
     }
 }
 
@@ -77,7 +91,7 @@ function manageKeyEvent(eventIn){
         setImageIndex(0);
     }else if(eventIn.keyCode == 39){
         //Do stuff when right key is pressed.
-        setImageIndex(1);
+        setImageIndex(2);
     }
     
 }
@@ -87,7 +101,6 @@ function resizeImage(){
     imageWidth = document.getElementById("imageHolderWidth").offsetWidth;
     
     var imageDisplay = document.getElementById("imageDisplay");
-    
     
     var limitByWidth;
     
@@ -107,20 +120,23 @@ function resizeImage(){
     
     if(limitByWidth){
         imageDisplay.width = imageWidth;
-        imageDisplay.height = (imageWidth) * (imageDisplay.naturalHeight/imageDisplay.naturalWidth);
+        document.getElementById("imageTableData").width = imageWidth;
+        imageDisplay.height = Math.floor((imageWidth) * (imageDisplay.naturalHeight/imageDisplay.naturalWidth));
     }else{
         imageDisplay.height = imageHeight;
-        imageDisplay.width = (imageHeight) * (imageDisplay.naturalWidth/imageDisplay.naturalHeight);
+        imageDisplay.width = Math.floor((imageHeight) * (imageDisplay.naturalWidth/imageDisplay.naturalHeight));
+        document.getElementById("imageTableData").width = imageWidth;
     }
 }
 
 function setupPage(){
-    var deferredAlbum = getAlbum("p0Cdu");
+    var deferredAlbum = getAlbum("RaZPU");
     deferredAlbum.done(function(receivedAlbum){
         album = receivedAlbum.data;
-        
-        document.getElementById("albumTitle").innerHTML = album.title;
-        setupImage("http://i.imgur.com/" + album.cover + "h.png");
+        if(album.title){
+            document.title = album.title;
+        }
+        setImageIndex(1);
     });
     deferredAlbum.fail(function(){
         

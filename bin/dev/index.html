@@ -5,31 +5,28 @@
         <title>btrimgr</title>
     </head>
 
-    <body onkeydown="manageKeyEvent(event);">
+    <body onkeydown="manageKeyEvent(event);" style="background-color:black; color:white;" onresize="resizeImage();">
         <table style="height:100%; width:100%; position:absolute; top:0; bottom:0; left:0; right:0;">
             <tr>
                 <td style="height:100%;" onclick="setImageIndex(0);">
-                    <img src="./img/leftArrow.svg" style="width:100%;"></img>
+                    <img src="./img/leftArrow.svg" style="width:100%;" id="leftArrowImage"></img>
                 </td>
 
                 <td style="width:90%;height:100%;" id="imageHolderWidth">
                     <table>
-                        <tr style="height:5vh; width=100%">
+                        <tr style="width:100%; height:20px">
                             <td>
-                                <h1 id="albumTitle" style="display:block;">
+                                <h2 id="title" style="display:block;">
                                     Album Title.
-                                </h1>
-                                <h2 id="imageTitle" style="display:none;">
-                                    Image Title.
                                 </h2>
                             </td>
                         </tr>
-                        <tr style="height:85vh; width=100%" id="imageHolderHeight">
-                            <td>
+                        <tr style="height:80vh;" id="imageHolderHeight">
+                            <td id="imageTableData">
                                 <img id="imageDisplay" src="./img/loading.gif" align="middle" style="display: block; margin: 0 auto;"></img>
                             </td>
                         </tr>
-                        <tr style="height:8vh; width=100%">
+                        <tr style="height:2vh; width=100%">
                             <td>
                                 <p id="description">
                                 </p>
@@ -39,8 +36,8 @@
                     </table>
                 </td>
 
-                <td style="height:100%;" onclick="setImageIndex(1);">
-                    <img src="./img/rightArrow.svg" style="width:100%;"></img>
+                <td style="height:100%;" onclick="setImageIndex(2);">
+                    <img src="./img/rightArrow.svg" style="width:100%;" id="rightArrowImage"></img>
                 </td>
             </tr>
         </table>
