@@ -62,7 +62,11 @@ function setArrows(){
 
 function presentImage(){
     if(currentImage == -1){
-        setupImage("http://i.imgur.com/" + album.cover + "h.png");
+        if(album.nsfw){
+            setupImage("./img/nsfw.svg");
+        }else{
+            setupImage("http://i.imgur.com/" + album.cover + "h.png");
+        }
         document.getElementById("title").innerHTML = album.title;
         document.getElementById("description").innerHTML = album.description;
     }else{
@@ -104,6 +108,7 @@ function resizeImage(){
     
     var limitByWidth;
     
+    //Determine by which dimension to limit the image 
     if(imageDisplay.naturalWidth > imageDisplay.naturalHeight){
         if((imageWidth) * (imageDisplay.naturalHeight/imageDisplay.naturalWidth) > imageHeight){
             limitByWidth=false;
@@ -130,7 +135,7 @@ function resizeImage(){
 }
 
 function setupPage(){
-    var deferredAlbum = getAlbum("RaZPU");
+    var deferredAlbum = getAlbum("Bi63r");
     deferredAlbum.done(function(receivedAlbum){
         album = receivedAlbum.data;
         if(album.title){
