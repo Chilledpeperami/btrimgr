@@ -5,6 +5,8 @@ var loadingImageURI = "./img/loading.gif";
 var album;
 var images = [];
 var currentImage = -1;
+var loadedImage = 0;
+var currentlyLoading = false;
 
 var imageWidth;
 var imageHeight;
@@ -28,6 +30,17 @@ function getApiClientId(){
     return apiClientIds[Math.floor(Math.random() / (1 / apiClientIds.length))];
 }
 
+function setArrows(){
+    if(currentImage == -1){
+        document.getElementById("leftArrowImage").src = "./img/leftArrowDisabled.svg";
+    }else if (currentImage >= album.images.length - 1){
+        document.getElementById("rightArrowImage").src = "./img/rightArrowDisabled.svg";
+    }else{
+        document.getElementById("leftArrowImage").src = "./img/leftArrow.svg";
+        document.getElementById("rightArrowImage").src = "./img/rightArrow.svg";
+    }
+}
+
 function setImageIndex(direction){
     if(direction == 0){
         if(currentImage <= -1){
@@ -46,19 +59,11 @@ function setImageIndex(direction){
     }
     
     setArrows();
+    aggressiveLoading();
     presentImage();
 }
 
-function setArrows(){
-    if(currentImage == -1){
-        document.getElementById("leftArrowImage").src = "./img/leftArrowDisabled.svg";
-    }else if (currentImage >= album.images.length - 1){
-        document.getElementById("rightArrowImage").src = "./img/rightArrowDisabled.svg";
-    }else{
-        document.getElementById("leftArrowImage").src = "./img/leftArrow.svg";
-        document.getElementById("rightArrowImage").src = "./img/rightArrow.svg";
-    }
-}
+
 
 function presentImage(){
     if(currentImage == -1){
@@ -77,6 +82,7 @@ function presentImage(){
 }
 
 function setupImage(imageURI){
+    var imageIndex = currentImage;
     document.getElementById("imageDisplay").src = loadingImageURI;
     document.getElementById("imageDisplay").width = "100";
     document.getElementById("imageDisplay").height = "100";
@@ -84,9 +90,24 @@ function setupImage(imageURI){
     var image = document.createElement("IMG");
     image.setAttribute("src", imageURI);
     image.onload = function (){
-        document.getElementById("imageDisplay").src = this.src;
-        resizeImage();
+        if(imageIndex == currentImage){    
+            document.getElementById("imageDisplay").src = this.src;
+            resizeImage();
+        }
     };
+}
+
+function aggressiveLoading(){
+    if(loadedImage < album.images_count && loadedImage < (currentImage + 5) && (currentlyLoading == false)){
+        currentlyLoading = true;
+        var image = document.createElement("IMG");
+        image.setAttribute("src", album.images[loadedImage].link);
+        image.onload = function(){
+            currentlyLoading = false;
+            aggressiveLoading();
+        };
+        loadedImage = loadedImage + 1;
+    }
 }
 
 function manageKeyEvent(eventIn){
@@ -135,7 +156,7 @@ function resizeImage(){
 }
 
 function setupPage(){
-    var deferredAlbum = getAlbum("Bi63r");
+    var deferredAlbum = getAlbum("p0Cdu");
     deferredAlbum.done(function(receivedAlbum){
         album = receivedAlbum.data;
         if(album.title){
