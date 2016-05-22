@@ -63,8 +63,6 @@ function setImageIndex(direction){
     presentImage();
 }
 
-
-
 function presentImage(){
     if(currentImage == -1){
         if(album.nsfw){
@@ -156,7 +154,7 @@ function resizeImage(){
 }
 
 function setupPage(){
-    var deferredAlbum = getAlbum("p0Cdu");
+    var deferredAlbum = getAlbum("kKpVV");
     deferredAlbum.done(function(receivedAlbum){
         album = receivedAlbum.data;
         if(album.title){
