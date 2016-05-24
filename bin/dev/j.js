@@ -11,21 +11,6 @@ var currentlyLoading = false;
 var imageWidth;
 var imageHeight;
 
-//Performs ajax to get album
-function getAlbum(albumId){
-    return $.ajax(
-        "https://api.imgur.com/3/album/" + albumId,
-        {
-            accepts:"application/json",
-            crossDomain: true,
-            method: "GET",
-            headers:{
-                Authorization: "Client-ID " + getApiClientId()
-            }
-        }
-    );
-}
-
 function getApiClientId(){
     return apiClientIds[Math.floor(Math.random() / (1 / apiClientIds.length))];
 }
@@ -154,17 +139,21 @@ function resizeImage(){
 }
 
 function setupPage(){
-    var deferredAlbum = getAlbum("kKpVV");
-    deferredAlbum.done(function(receivedAlbum){
-        album = receivedAlbum.data;
-        if(album.title){
-            document.title = album.title;
+    
+    var albumRequest = new XMLHttpRequest();
+    albumRequest.onreadystatechange = function() {
+        if (albumRequest.readyState == 4 && albumRequest.status == 200) {
+            album = JSON.parse(albumRequest.responseText).data;
+            if(album.title){
+                document.title = album.title;
+            }
+            setImageIndex(1);
         }
-        setImageIndex(1);
-    });
-    deferredAlbum.fail(function(){
-        
-    });
+        //Add failed to get album.
+    };
+    albumRequest.open("GET", "https://api.imgur.com/3/album/" + "kKpVV", true);
+    albumRequest.setRequestHeader("Authorization", "Client-ID " + getApiClientId());
+    albumRequest.send();
     
     document.getElementById("imageDisplay").src = loadingImageURI;
     document.getElementById("imageDisplay").width = "100";
