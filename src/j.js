@@ -56,11 +56,11 @@ function presentImage(){
             setupImage("http://i.imgur.com/" + album.cover + "h.png");
         }
         document.getElementById("title").innerHTML = album.title;
-        document.getElementById("description").innerHTML = album.description;
+        document.getElementById("description").innerHTML = SnuOwnd.getParser().render(album.images[currentImage].description);
     }else{
         setupImage(album.images[currentImage].link);
         document.getElementById("title").innerHTML = album.images[currentImage].title;
-        document.getElementById("description").innerHTML = album.images[currentImage].description;
+        document.getElementById("description").innerHTML = SnuOwnd.getParser().render(album.images[currentImage].description);
     }
 }
 
@@ -151,7 +151,7 @@ function setupPage(){
         }
         //Add failed to get album.
     };
-    albumRequest.open("GET", "https://api.imgur.com/3/album/" + "kKpVV", true);
+    albumRequest.open("GET", "https://api.imgur.com/3/album/" + "c2SD4", true);
     albumRequest.setRequestHeader("Authorization", "Client-ID " + getApiClientId());
     albumRequest.send();
     
