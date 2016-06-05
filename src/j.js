@@ -140,6 +140,34 @@ function resizeImage(){
 
 function setupPage(){
     
+    if(window.location.href.indexOf("/a/") != -1){
+        
+        if(window.location.href.slice(-1) == "/"){
+            var albumId = window.location.href.slice(-7,-2);
+        }else{
+            var albumId = window.location.href.slice(-6,-1);
+        }
+        
+        var albumRequest = new XMLHttpRequest();
+        albumRequest.onreadystatechange = function() {
+            if (albumRequest.readyState == 4 && albumRequest.status == 200) {
+                album = JSON.parse(albumRequest.responseText).data;
+                if(album.title){
+                    document.title = album.title;
+                }
+                setImageIndex(1);
+            }
+            //Add failed to get album.
+        };
+        albumRequest.open("GET", "https://api.imgur.com/3/album/" + "nc1b0", true);
+        albumRequest.setRequestHeader("Authorization", "Client-ID " + getApiClientId());
+        albumRequest.send();
+
+        document.getElementById("imageDisplay").src = loadingImageURI;
+        document.getElementById("imageDisplay").width = "100";
+        document.getElementById("imageDisplay").height = "100";
+    }
+    /*
     var albumRequest = new XMLHttpRequest();
     albumRequest.onreadystatechange = function() {
         if (albumRequest.readyState == 4 && albumRequest.status == 200) {
@@ -157,7 +185,7 @@ function setupPage(){
     
     document.getElementById("imageDisplay").src = loadingImageURI;
     document.getElementById("imageDisplay").width = "100";
-    document.getElementById("imageDisplay").height = "100";
+    document.getElementById("imageDisplay").height = "100";*/
 }
 
 function spaceIfNull(stringIn){
