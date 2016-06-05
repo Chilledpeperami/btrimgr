@@ -1,6 +1,6 @@
 "use strict";
 var apiClientIds = ["82f991a3e8e7949"];
-var loadingImageURI = "./static/img/loading.gif";
+var loadingImageURI = "/static/img/loading.gif";
 
 var album;
 var images = [];
@@ -17,12 +17,12 @@ function getApiClientId(){
 
 function setArrows(){
     if(currentImage == -1){
-        document.getElementById("leftArrowImage").src = "./static/img/leftArrowDisabled.svg";
+        document.getElementById("leftArrowImage").src = "/static/img/leftArrowDisabled.svg";
     }else if (currentImage >= album.images.length - 1){
-        document.getElementById("rightArrowImage").src = "./static/img/rightArrowDisabled.svg";
+        document.getElementById("rightArrowImage").src = "/static/img/rightArrowDisabled.svg";
     }else{
-        document.getElementById("leftArrowImage").src = "./static/img/leftArrow.svg";
-        document.getElementById("rightArrowImage").src = "./static/img/rightArrow.svg";
+        document.getElementById("leftArrowImage").src = "/static/img/leftArrow.svg";
+        document.getElementById("rightArrowImage").src = "/static/img/rightArrow.svg";
     }
 }
 
@@ -51,7 +51,7 @@ function setImageIndex(direction){
 function presentImage(){
     if(currentImage == -1){
         if(album.nsfw){
-            setupImage("./static/img/nsfw.svg");
+            setupImage("/static/img/nsfw.svg");
         }else{
             setupImage("http://i.imgur.com/" + album.cover + "h.png");
         }
@@ -159,7 +159,7 @@ function setupPage(){
             }
             //Add failed to get album.
         };
-        albumRequest.open("GET", "https://api.imgur.com/3/album/" + "nc1b0", true);
+        albumRequest.open("GET", "https://api.imgur.com/3/album/" + albumId , true);
         albumRequest.setRequestHeader("Authorization", "Client-ID " + getApiClientId());
         albumRequest.send();
 
