@@ -55,12 +55,12 @@ function presentImage(){
         }else{
             setupImage("http://i.imgur.com/" + album.cover + "h.png");
         }
-        document.getElementById("title").innerHTML = album.title;
-        document.getElementById("description").innerHTML = SnuOwnd.getParser().render(album.images[currentImage].description);
+        document.getElementById("title").innerHTML = album.title + "<small><small><small><small><small><a href='http://imgur.com/a/" + album.id + "/zip'> Album zip download link.</a></small></small></small></small></small>";
+        document.getElementById("description").innerHTML = SnuOwnd.getParser().render(spaceIfNull(album.description));
     }else{
         setupImage(album.images[currentImage].link);
-        document.getElementById("title").innerHTML = album.images[currentImage].title;
-        document.getElementById("description").innerHTML = SnuOwnd.getParser().render(album.images[currentImage].description);
+        document.getElementById("title").innerHTML = spaceIfNull(album.images[currentImage].title);
+        document.getElementById("description").innerHTML = SnuOwnd.getParser().render(spaceIfNull(album.images[currentImage].description));
     }
 }
 
@@ -151,13 +151,21 @@ function setupPage(){
         }
         //Add failed to get album.
     };
-    albumRequest.open("GET", "https://api.imgur.com/3/album/" + "c2SD4", true);
+    albumRequest.open("GET", "https://api.imgur.com/3/album/" + "nc1b0", true);
     albumRequest.setRequestHeader("Authorization", "Client-ID " + getApiClientId());
     albumRequest.send();
     
     document.getElementById("imageDisplay").src = loadingImageURI;
     document.getElementById("imageDisplay").width = "100";
     document.getElementById("imageDisplay").height = "100";
+}
+
+function spaceIfNull(stringIn){
+    if(stringIn == null){
+        return " ";
+    }else{
+        return stringIn;
+    }
 }
 
 window.load = setupPage();
