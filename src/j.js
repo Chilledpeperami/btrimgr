@@ -142,11 +142,7 @@ function setupPage(){
     
     if(window.location.href.indexOf("/a/") != -1){
         
-        if(window.location.href.slice(-1) == "/"){
-            var albumId = window.location.href.slice(-7,-2);
-        }else{
-            var albumId = window.location.href.slice(-6,-1);
-        }
+        var albumId = window.location.href.slice(-6,-1);
         
         var albumRequest = new XMLHttpRequest();
         albumRequest.onreadystatechange = function() {
