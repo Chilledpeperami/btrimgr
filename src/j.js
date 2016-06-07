@@ -58,7 +58,7 @@ function presentImage(){
         document.getElementById("title").innerHTML = album.title + "<small><small><small><small><small><a href='http://imgur.com/a/" + album.id + "/zip'> Album zip download link.</a></small></small></small></small></small>";
         document.getElementById("description").innerHTML = SnuOwnd.getParser().render(spaceIfNull(album.description));
     }else{
-        setupImage(gifvIfGif(album.images[currentImage].link));
+        setupImage(webmIfGif(album.images[currentImage].link));
         document.getElementById("title").innerHTML = spaceIfNull(album.images[currentImage].title);
         document.getElementById("description").innerHTML = SnuOwnd.getParser().render(spaceIfNull(album.images[currentImage].description));
     }
@@ -183,9 +183,9 @@ function spaceIfNull(stringIn){
     }
 }
 
-function gifvIfGif(stringIn){
+function webmIfGif(stringIn){
     if(stringIn.slice(-4) == ".gif"){
-        return stringIn.slice(0, -4) + ".gifv";
+        return stringIn.slice(0, -4) + ".webm";
     }else{
         return stringIn;
     }
