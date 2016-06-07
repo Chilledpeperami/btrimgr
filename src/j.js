@@ -184,8 +184,8 @@ function spaceIfNull(stringIn){
 }
 
 function gifvIfGif(stringIn){
-    if(window.location.href.slice(-4) == ".gif"){
-        return window.location.href.slice(0, -4) + ".gifv";
+    if(stringIn(-4) == ".gif"){
+        return stringIn(0, -4) + ".gifv";
     }else{
         return stringIn;
     }
