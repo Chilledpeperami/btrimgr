@@ -58,7 +58,7 @@ function presentImage(){
         document.getElementById("title").innerHTML = album.title + "<small><small><small><small><small><a href='http://imgur.com/a/" + album.id + "/zip'> Album zip download link.</a></small></small></small></small></small>";
         document.getElementById("description").innerHTML = SnuOwnd.getParser().render(spaceIfNull(album.description));
     }else{
-        setupImage(webmIfGif(album.images[currentImage].link));
+        setupImage(album.images[currentImage].link);
         document.getElementById("title").innerHTML = spaceIfNull(album.images[currentImage].title);
         document.getElementById("description").innerHTML = SnuOwnd.getParser().render(spaceIfNull(album.images[currentImage].description));
     }
