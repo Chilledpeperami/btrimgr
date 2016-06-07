@@ -140,7 +140,7 @@ function resizeImage(){
 
 function setupPage(){
     
-    if(window.location.href.indexOf("/a/") != -1){
+    if(window.location.href.indexOf("/a/") != -1 || window.location.href.indexOf("/gallery/") != -1){
         
         if(window.location.href.slice(-1) == "/"){
             var albumId = window.location.href.slice(-6,-1);
