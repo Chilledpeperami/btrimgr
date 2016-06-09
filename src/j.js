@@ -74,7 +74,7 @@ function setupImage(imageURI){
     var fileExtension = imageURI.slice(imageURI.lastIndexOf("."));
     if(fileExtension == ".gif" || fileExtension == ".webm" || fileExtension == ".mp4" ||  fileExtension == ".gifv") {
         var video = document.createElement("VIDEO");
-        video.setAttribute("src", imageURI.slice(0 , imageURI.lastIndexOf(".")) + ".mp4");
+        video.setAttribute("src", imageURI.slice(0 , imageURI.lastIndexOf(".")) + ".gifv");
         video.onload = function (){
             if(imageIndex == currentImage){    
                 document.getElementById("videoDisplay").src = this.src;
@@ -124,6 +124,8 @@ function manageKeyEvent(eventIn){
 function resizeImage(){
     imageHeight = document.getElementById("imageHolderHeight").offsetHeight;
     imageWidth = document.getElementById("imageHolderWidth").offsetWidth;
+    
+    var contentDisplay;
     
     if(document.getElementById("videoDisplay").style == "block"){
         contentDisplay = document.getElementById("videoDisplay");
