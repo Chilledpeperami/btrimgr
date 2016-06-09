@@ -125,7 +125,7 @@ function resizeImage(){
     imageHeight = document.getElementById("imageHolderHeight").offsetHeight;
     imageWidth = document.getElementById("imageHolderWidth").offsetWidth;
     
-    if(document.getElementById("videoDisplay").style == block){
+    if(document.getElementById("videoDisplay").style == "block"){
         contentDisplay = document.getElementById("videoDisplay");
     }else{
         contentDisplay = document.getElementById("imageDisplay");
