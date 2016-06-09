@@ -66,18 +66,35 @@ function presentImage(){
 
 function setupImage(imageURI){
     var imageIndex = currentImage;
+    document.getElementById("imageDisplay").style.display = "block";
     document.getElementById("imageDisplay").src = loadingImageURI;
     document.getElementById("imageDisplay").width = "100";
     document.getElementById("imageDisplay").height = "100";
     
-    var image = document.createElement("IMG");
-    image.setAttribute("src", imageURI);
-    image.onload = function (){
-        if(imageIndex == currentImage){    
-            document.getElementById("imageDisplay").src = this.src;
-            resizeImage();
+    var fileExtension = imageURI.slice(imageURI.lastIndexOf("."));
+    if(fileExtension == ".gif" || fileExtension == ".webm" || fileExtension == ".mp4" ||  fileExtension == ".gifv") {
+        var video = document.createElement("video");
+        video.setAttribute("src", imageURI.slice(0 , imageURI.lastIndexOf(".")) + ".mp4");
+        video.onload = function (){
+            if(imageIndex == currentImage){    
+                document.getElementById("videoDisplay").src = this.src;
+                document.getElementById("imageDisplay").style.display = "none";
+                document.getElementById("videoDisplay").style.display = "block";
+                resizeImage();
+            }
         }
-    };
+    }else {
+        var image = document.createElement("IMG");
+        image.setAttribute("src", imageURI);
+        image.onload = function (){
+            if(imageIndex == currentImage){    
+                document.getElementById("imageDisplay").src = this.src;
+                document.getElementById("imageDisplay").style.display = "block";
+                document.getElementById("videoDisplay").style.display = "none";
+                resizeImage();
+            }
+        };
+    }
 }
 
 function aggressiveLoading(){
@@ -108,19 +125,23 @@ function resizeImage(){
     imageHeight = document.getElementById("imageHolderHeight").offsetHeight;
     imageWidth = document.getElementById("imageHolderWidth").offsetWidth;
     
-    var imageDisplay = document.getElementById("imageDisplay");
+    if(document.getElementById("videoDisplay").style == block){
+        contentDisplay = document.getElementById("videoDisplay");
+    }else{
+        contentDisplay = document.getElementById("imageDisplay");
+    }
     
     var limitByWidth;
     
     //Determine by which dimension to limit the image 
-    if(imageDisplay.naturalWidth > imageDisplay.naturalHeight){
-        if((imageWidth) * (imageDisplay.naturalHeight/imageDisplay.naturalWidth) > imageHeight){
+    if(contentDisplay.naturalWidth > contentDisplay.naturalHeight){
+        if((imageWidth) * (contentDisplay.naturalHeight/contentDisplay.naturalWidth) > imageHeight){
             limitByWidth=false;
         }else{
             limitByWidth=true;
         }
     }else{
-        if((imageHeight) * (imageDisplay.naturalWidth/imageDisplay.naturalHeight) > imageWidth){
+        if((imageHeight) * (contentDisplay.naturalWidth/contentDisplay.naturalHeight) > imageWidth){
             limitByWidth=true;
         }else{
             limitByWidth=false;
@@ -128,14 +149,15 @@ function resizeImage(){
     }
     
     if(limitByWidth){
-        imageDisplay.width = imageWidth;
+        contentDisplay.width = imageWidth;
         document.getElementById("imageTableData").width = imageWidth;
-        imageDisplay.height = Math.floor((imageWidth) * (imageDisplay.naturalHeight/imageDisplay.naturalWidth));
+        contentDisplay.height = Math.floor((imageWidth) * (contentDisplay.naturalHeight/contentDisplay.naturalWidth));
     }else{
-        imageDisplay.height = imageHeight;
-        imageDisplay.width = Math.floor((imageHeight) * (imageDisplay.naturalWidth/imageDisplay.naturalHeight));
+        contentDisplay.height = imageHeight;
+        contentDisplay.width = Math.floor((imageHeight) * (contentDisplay.naturalWidth/contentDisplay.naturalHeight));
         document.getElementById("imageTableData").width = imageWidth;
     }
+    
 }
 
 function setupPage(){
