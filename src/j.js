@@ -76,8 +76,7 @@ function setupImage(imageURI){
         document.getElementById("videoDisplay").src = imageURI.slice(0 , imageURI.lastIndexOf(".")) + ".mp4";
         document.getElementById("imageDisplay").style.display = "none";
         document.getElementById("videoDisplay").style.display = "block";
-        resizeImage();
-        resizeImage();
+        window.setTimeout(resizeImage(), 50);
     }else {
         var image = document.createElement("IMG");
         image.setAttribute("src", imageURI);
