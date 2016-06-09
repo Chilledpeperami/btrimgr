@@ -73,7 +73,7 @@ function setupImage(imageURI){
     
     var fileExtension = imageURI.slice(imageURI.lastIndexOf("."));
     if(fileExtension == ".gif" || fileExtension == ".webm" || fileExtension == ".mp4" ||  fileExtension == ".gifv") {
-        var video = document.createElement("video");
+        var video = document.createElement("VIDEO");
         video.setAttribute("src", imageURI.slice(0 , imageURI.lastIndexOf(".")) + ".mp4");
         video.onload = function (){
             if(imageIndex == currentImage){    
