@@ -77,6 +77,7 @@ function setupImage(imageURI){
         document.getElementById("imageDisplay").style.display = "none";
         document.getElementById("videoDisplay").style.display = "block";
         resizeImage();
+        resizeImage();
     }else {
         var image = document.createElement("IMG");
         image.setAttribute("src", imageURI);
@@ -120,7 +121,7 @@ function resizeImage(){
     imageWidth = document.getElementById("imageHolderWidth").offsetWidth;
     
     var contentDisplay;
-    console.log(document.getElementById("videoDisplay").style.display == "block");
+    //console.log(document.getElementById("videoDisplay").style.display == "block");
     
     if(document.getElementById("videoDisplay").style.display == "block"){
         contentDisplay = document.getElementById("videoDisplay");
