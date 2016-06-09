@@ -73,16 +73,10 @@ function setupImage(imageURI){
     
     var fileExtension = imageURI.slice(imageURI.lastIndexOf("."));
     if(fileExtension == ".gif" || fileExtension == ".webm" || fileExtension == ".mp4" ||  fileExtension == ".gifv") {
-        var video = document.createElement("VIDEO");
-        video.setAttribute("src", imageURI.slice(0 , imageURI.lastIndexOf(".")) + ".gifv");
-        video.onload = function (){
-            if(imageIndex == currentImage){    
-                document.getElementById("videoDisplay").src = this.src;
-                document.getElementById("imageDisplay").style.display = "none";
-                document.getElementById("videoDisplay").style.display = "block";
-                resizeImage();
-            }
-        }
+        document.getElementById("videoDisplay").src = imageURI.slice(0 , imageURI.lastIndexOf(".")) + ".gifv";
+        document.getElementById("imageDisplay").style.display = "none";
+        document.getElementById("videoDisplay").style.display = "block";
+        resizeImage();
     }else {
         var image = document.createElement("IMG");
         image.setAttribute("src", imageURI);
