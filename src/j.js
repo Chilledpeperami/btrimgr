@@ -183,12 +183,4 @@ function spaceIfNull(stringIn){
     }
 }
 
-function webmIfGif(stringIn){
-    if(stringIn.slice(-4) == ".gif"){
-        return stringIn.slice(0, -4) + ".webm";
-    }else{
-        return stringIn;
-    }
-}
-
 window.load = setupPage();
