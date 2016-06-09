@@ -130,14 +130,14 @@ function resizeImage(){
     var limitByWidth;
     
     //Determine by which dimension to limit the image 
-    if(contentDisplay.naturalWidth > contentDisplay.naturalHeight){
-        if((imageWidth) * (contentDisplay.naturalHeight/contentDisplay.naturalWidth) > imageHeight){
+    if(getWidth(contentDisplay) > getHeight(contentDisplay)){
+        if((imageWidth) * (getHeight(contentDisplay)/getWidth(contentDisplay)) > imageHeight){
             limitByWidth=false;
         }else{
             limitByWidth=true;
         }
     }else{
-        if((imageHeight) * (contentDisplay.naturalWidth/contentDisplay.naturalHeight) > imageWidth){
+        if((imageHeight) * (getWidth(contentDisplay)/getHeight(contentDisplay)) > imageWidth){
             limitByWidth=true;
         }else{
             limitByWidth=false;
@@ -147,12 +147,13 @@ function resizeImage(){
     if(limitByWidth){
         contentDisplay.width = imageWidth;
         document.getElementById("imageTableData").width = imageWidth;
-        contentDisplay.height = Math.floor((imageWidth) * (contentDisplay.naturalHeight/contentDisplay.naturalWidth));
+        contentDisplay.height = Math.floor((imageWidth) * (getHeight(contentDisplay)/getWidth(contentDisplay)));
     }else{
         contentDisplay.height = imageHeight;
-        contentDisplay.width = Math.floor((imageHeight) * (contentDisplay.naturalWidth/contentDisplay.naturalHeight));
+        contentDisplay.width = Math.floor((imageHeight) * (getWidth(contentDisplay)/getHeight(contentDisplay)));
         document.getElementById("imageTableData").width = imageWidth;
     }
+    
     
 }
 
@@ -198,6 +199,23 @@ function spaceIfNull(stringIn){
         return " ";
     }else{
         return stringIn;
+    }
+}
+
+//Function to get the natural width of video or picture.
+function getWidth(contentIn){
+    if(contentIn.videoWidth){
+        return contentIn.videoWidth;
+    }else{
+        return contentIn.naturalWidth;
+    }
+}
+
+function getHeight(contentIn){
+    if(contentIn.videoHeight){
+        return contentIn.videoHeight;
+    }else{
+        return contentIn.naturalHeight;
     }
 }
 
