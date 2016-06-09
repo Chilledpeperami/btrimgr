@@ -120,6 +120,7 @@ function resizeImage(){
     imageWidth = document.getElementById("imageHolderWidth").offsetWidth;
     
     var contentDisplay;
+    console.log(document.getElementById("videoDisplay").style.display == "block");
     
     if(document.getElementById("videoDisplay").style.display == "block"){
         contentDisplay = document.getElementById("videoDisplay");
