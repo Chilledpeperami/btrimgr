@@ -149,6 +149,9 @@ function resizeImage(){
         }
     }
     
+    console.log("isVideo: " + isVideo);
+    console.log("limitByWidth: " + limitByWidth);
+    
     if(isVideo){
         if(limitByWidth){
             contentDisplay.width = imageWidth;
