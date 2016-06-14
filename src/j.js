@@ -76,7 +76,9 @@ function setupImage(imageURI){
         document.getElementById("videoDisplay").src = imageURI.slice(0 , imageURI.lastIndexOf(".")) + ".mp4";
         document.getElementById("imageDisplay").style.display = "none";
         document.getElementById("videoDisplay").style.display = "block";
-        resizeImage();
+        document.getElementById("videoDisplay").onload = function(){
+            resizeImage();   
+        }
     }else {
         var image = document.createElement("IMG");
         image.setAttribute("src", imageURI);
@@ -136,6 +138,7 @@ function resizeImage(){
     
     //Determine by which dimension to limit the image 
     if(getWidth(contentDisplay) > getHeight(contentDisplay)){
+        //Don't use if else just give the boolean value.
         if((imageWidth) * (getHeight(contentDisplay)/getWidth(contentDisplay)) > imageHeight){
             limitByWidth=false;
         }else{
@@ -227,6 +230,7 @@ function getWidth(contentIn){
     }
 }
 
+//Function to get the natural height of video or picture.
 function getHeight(contentIn){
     if(contentIn.videoHeight){
         return contentIn.videoHeight;
