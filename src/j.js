@@ -76,7 +76,7 @@ function setupImage(imageURI){
         document.getElementById("videoDisplay").src = imageURI.slice(0 , imageURI.lastIndexOf(".")) + ".mp4";
         document.getElementById("imageDisplay").style.display = "none";
         document.getElementById("videoDisplay").style.display = "block";
-        window.setTimeout(resizeImage(), 50);
+        resizeImage();
     }else {
         var image = document.createElement("IMG");
         image.setAttribute("src", imageURI);
@@ -92,7 +92,10 @@ function setupImage(imageURI){
 }
 
 function aggressiveLoading(){
-    if(loadedImage < album.images_count && loadedImage < (currentImage + 5) && (currentlyLoading == false)){
+    if(album.images[loadedImage].link.slice(album.images[loadedImage].link.lastIndexOf(".")) == ".gif"){
+        loadedImage = loadedImage + 1;
+        aggressiveLoading();
+    }else if(loadedImage < album.images_count && loadedImage < (currentImage + 5) && (currentlyLoading == false)){
         currentlyLoading = true;
         var image = document.createElement("IMG");
         image.setAttribute("src", album.images[loadedImage].link);
@@ -119,13 +122,14 @@ function resizeImage(){
     imageHeight = document.getElementById("imageHolderHeight").offsetHeight;
     imageWidth = document.getElementById("imageHolderWidth").offsetWidth;
     
-    var contentDisplay;
-    //console.log(document.getElementById("videoDisplay").style.display == "block");
+    var contentDisplay, isVideo;
     
     if(document.getElementById("videoDisplay").style.display == "block"){
         contentDisplay = document.getElementById("videoDisplay");
+        isVideo = true;
     }else{
         contentDisplay = document.getElementById("imageDisplay");
+        isVideo = false;
     }
     
     var limitByWidth;
@@ -145,16 +149,24 @@ function resizeImage(){
         }
     }
     
-    if(limitByWidth){
-        contentDisplay.width = imageWidth;
-        document.getElementById("imageTableData").width = imageWidth;
-        contentDisplay.height = Math.floor((imageWidth) * (getHeight(contentDisplay)/getWidth(contentDisplay)));
+    if(isVideo){
+        if(limitByWidth){
+            contentDisplay.width = imageWidth;
+        }else{
+            contentDisplay.height = imageHeight;
+        }
+        
     }else{
-        contentDisplay.height = imageHeight;
-        contentDisplay.width = Math.floor((imageHeight) * (getWidth(contentDisplay)/getHeight(contentDisplay)));
-        document.getElementById("imageTableData").width = imageWidth;
+        if(limitByWidth){
+            contentDisplay.width = imageWidth;
+            document.getElementById("imageTableData").width = imageWidth;
+            contentDisplay.height = Math.floor((imageWidth) * (getHeight(contentDisplay)/getWidth(contentDisplay)));
+        }else{
+            contentDisplay.height = imageHeight;
+            contentDisplay.width = Math.floor((imageHeight) * (getWidth(contentDisplay)/getHeight(contentDisplay)));
+            document.getElementById("imageTableData").width = imageWidth;
+        }
     }
-    
     
 }
 
