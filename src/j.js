@@ -73,6 +73,7 @@ function setupImage(imageURI){
     
     var fileExtension = imageURI.slice(imageURI.lastIndexOf("."));
     if(fileExtension == ".gif" || fileExtension == ".webm" || fileExtension == ".mp4" ||  fileExtension == ".gifv") {
+        document.getElementById("videoDisplay").width = 10;
         document.getElementById("videoDisplay").src = imageURI.slice(0 , imageURI.lastIndexOf(".")) + ".mp4";
         document.getElementById("imageDisplay").style.display = "none";
         document.getElementById("videoDisplay").style.display = "block";
@@ -127,7 +128,6 @@ function resizeImage(){
     
     if(document.getElementById("videoDisplay").style.display == "block"){
         contentDisplay = document.getElementById("videoDisplay");
-        contentDisplay.width = 10;
     }else{
         contentDisplay = document.getElementById("imageDisplay");
     }
