@@ -91,18 +91,20 @@ function setupImage(imageURI){
 }
 
 function aggressiveLoading(){
-    if(album.images[loadedImage].link.slice(album.images[loadedImage].link.lastIndexOf(".")) == ".gif"){
-        loadedImage = loadedImage + 1;
-        aggressiveLoading();
-    }else if(loadedImage < album.images_count && loadedImage < (currentImage + 5) && (currentlyLoading == false)){
-        currentlyLoading = true;
-        var image = document.createElement("IMG");
-        image.setAttribute("src", album.images[loadedImage].link);
-        image.onload = function(){
-            currentlyLoading = false;
+    if(loadedImage < album.images_count && loadedImage < (currentImage + 5)){
+        if(album.images[loadedImage].link.slice(album.images[loadedImage].link.lastIndexOf(".")) == ".gif"){
+            loadedImage = loadedImage + 1;
             aggressiveLoading();
-        };
-        loadedImage = loadedImage + 1;
+        }else if(currentlyLoading == false){
+            currentlyLoading = true;
+            var image = document.createElement("IMG");
+            image.setAttribute("src", album.images[loadedImage].link);
+            image.onload = function(){
+                currentlyLoading = false;
+                aggressiveLoading();
+            };
+            loadedImage = loadedImage + 1;
+        }
     }
 }
 
