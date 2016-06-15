@@ -76,9 +76,6 @@ function setupImage(imageURI){
         document.getElementById("videoDisplay").src = imageURI.slice(0 , imageURI.lastIndexOf(".")) + ".mp4";
         document.getElementById("imageDisplay").style.display = "none";
         document.getElementById("videoDisplay").style.display = "block";
-        document.getElementById("videoDisplay").onload = function(){
-            resizeImage();   
-        }
     }else {
         var image = document.createElement("IMG");
         image.setAttribute("src", imageURI);
@@ -124,16 +121,6 @@ function resizeImage(){
     imageHeight = document.getElementById("imageHolderHeight").offsetHeight;
     imageWidth = document.getElementById("imageHolderWidth").offsetWidth;
     
-    var contentDisplay, isVideo;
-    
-    if(document.getElementById("videoDisplay").style.display == "block"){
-        contentDisplay = document.getElementById("videoDisplay");
-        isVideo = true;
-    }else{
-        contentDisplay = document.getElementById("imageDisplay");
-        isVideo = false;
-    }
-    
     var limitByWidth;
     
     //Determine by which dimension to limit the image 
@@ -155,25 +142,15 @@ function resizeImage(){
     console.log("isVideo: " + isVideo);
     console.log("limitByWidth: " + limitByWidth);
     
-    if(isVideo){
-        if(limitByWidth){
-            contentDisplay.width = imageWidth;
-        }else{
-            contentDisplay.height = imageHeight;
-        }
-        
+   if(limitByWidth){
+        contentDisplay.width = imageWidth;
+        document.getElementById("imageTableData").width = imageWidth;
+        contentDisplay.height = Math.floor((imageWidth) * (getHeight(contentDisplay)/getWidth(contentDisplay)));
     }else{
-        if(limitByWidth){
-            contentDisplay.width = imageWidth;
-            document.getElementById("imageTableData").width = imageWidth;
-            contentDisplay.height = Math.floor((imageWidth) * (getHeight(contentDisplay)/getWidth(contentDisplay)));
-        }else{
-            contentDisplay.height = imageHeight;
-            contentDisplay.width = Math.floor((imageHeight) * (getWidth(contentDisplay)/getHeight(contentDisplay)));
-            document.getElementById("imageTableData").width = imageWidth;
-        }
-    }
-    
+        contentDisplay.height = imageHeight;
+        contentDisplay.width = Math.floor((imageHeight) * (getWidth(contentDisplay)/getHeight(contentDisplay)));
+        document.getElementById("imageTableData").width = imageWidth;
+    }    
 }
 
 function setupPage(){
