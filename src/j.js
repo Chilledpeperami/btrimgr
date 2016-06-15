@@ -121,6 +121,14 @@ function resizeImage(){
     imageHeight = document.getElementById("imageHolderHeight").offsetHeight;
     imageWidth = document.getElementById("imageHolderWidth").offsetWidth;
     
+    var contentDisplay;
+    
+    if(document.getElementById("videoDisplay").style.display == "block"){
+        contentDisplay = document.getElementById("videoDisplay");
+    }else{
+        contentDisplay = document.getElementById("imageDisplay");
+    }
+    
     var limitByWidth;
     
     //Determine by which dimension to limit the image 
@@ -139,10 +147,8 @@ function resizeImage(){
         }
     }
     
-    console.log("isVideo: " + isVideo);
-    console.log("limitByWidth: " + limitByWidth);
-    
-   if(limitByWidth){
+
+    if(limitByWidth){
         contentDisplay.width = imageWidth;
         document.getElementById("imageTableData").width = imageWidth;
         contentDisplay.height = Math.floor((imageWidth) * (getHeight(contentDisplay)/getWidth(contentDisplay)));
@@ -150,7 +156,8 @@ function resizeImage(){
         contentDisplay.height = imageHeight;
         contentDisplay.width = Math.floor((imageHeight) * (getWidth(contentDisplay)/getHeight(contentDisplay)));
         document.getElementById("imageTableData").width = imageWidth;
-    }    
+    }
+    
 }
 
 function setupPage(){
