@@ -136,18 +136,9 @@ function resizeImage(){
     
     //Determine by which dimension to limit the image 
     if(getWidth(contentDisplay) > getHeight(contentDisplay)){
-        //Don't use if else just give the boolean value.
-        if((imageWidth) * (getHeight(contentDisplay)/getWidth(contentDisplay)) > imageHeight){
-            limitByWidth=false;
-        }else{
-            limitByWidth=true;
-        }
+        limitByWidth = !((imageWidth) * (getHeight(contentDisplay)/getWidth(contentDisplay)) > imageHeight);
     }else{
-        if((imageHeight) * (getWidth(contentDisplay)/getHeight(contentDisplay)) > imageWidth){
-            limitByWidth=true;
-        }else{
-            limitByWidth=false;
-        }
+        limitByWidth = !((imageHeight) * (getWidth(contentDisplay)/getHeight(contentDisplay)) > imageWidth);
     }
     
 
