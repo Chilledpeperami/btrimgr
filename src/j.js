@@ -127,6 +127,7 @@ function resizeImage(){
     
     if(document.getElementById("videoDisplay").style.display == "block"){
         contentDisplay = document.getElementById("videoDisplay");
+        contentDisplay.width = 10;
     }else{
         contentDisplay = document.getElementById("imageDisplay");
     }
