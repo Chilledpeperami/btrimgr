@@ -188,6 +188,9 @@ function setupPage(){
         document.getElementById("imageDisplay").src = loadingImageURI;
         document.getElementById("imageDisplay").width = "100";
         document.getElementById("imageDisplay").height = "100";
+    }else{
+        document.getElementById("albumViewer").style.display = "none";
+        document.getElementById("homePage").style.display = "block";
     }
 }
 

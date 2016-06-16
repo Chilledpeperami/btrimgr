@@ -13,7 +13,7 @@
     </head>
 
     <body onkeydown="manageKeyEvent(event);" style="background-color:black; color:white;" onresize="resizeImage();">
-        <div id="albumViewer">
+        <div id="albumViewer" style="display:block;">
             <table style="height:100%; width:100%; position:absolute; top:0; bottom:0; left:0; right:0;">
                 <tr>
                     <td style="height:100%;" onclick="setImageIndex(0);">
@@ -50,6 +50,9 @@
                     </td>
                 </tr>
             </table>
+        </div>
+        <div id="homePage" style="display:none;">
+            Hello there are things!
         </div>
     </body>
 
