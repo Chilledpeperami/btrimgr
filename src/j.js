@@ -191,6 +191,7 @@ function setupPage(){
     }else{
         document.getElementById("albumViewer").style.display = "none";
         document.getElementById("homePage").style.display = "block";
+        document.getElementById("baseTag").target = "_self";
     }
 }
 
