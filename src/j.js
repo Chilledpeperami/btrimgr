@@ -55,7 +55,7 @@ function presentImage(){
         }else{
             setupImage("http://i.imgur.com/" + album.cover + "h.png");
         }
-        document.getElementById("title").innerHTML = album.title + "<small><small><small><small><small><a href='http://imgur.com/a/" + album.id + "/zip'> Album zip download link.</a></small></small></small></small></small>";
+        document.getElementById("title").innerHTML = spaceIfNull(album.title) + "<small><small><small><small><small><a href='http://imgur.com/a/" + album.id + "/zip'> Album zip download link.</a></small></small></small></small></small>";
         document.getElementById("description").innerHTML = SnuOwnd.getParser().render(spaceIfNull(album.description));
     }else{
         setupImage(album.images[currentImage].link);
