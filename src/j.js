@@ -163,19 +163,14 @@ function setupPage(){
     //Do different stuff for gallery
     if(window.location.href.includes("/a/") || window.location.href.includes("/gallery/")){
         
-        //Update code as there might be stuff after the album/gallery id.
-        if(window.location.href.slice(-1) == "/"){
-            var albumId = window.location.href.slice(-6,-1);
-        }else{
-            var albumId = window.location.href.slice(-5);
-        }
-        
         if(window.location.href.includes("/gallery/")){
-           var requestUrl = "https://api.imgur.com/3/gallery/album/";
-           var errorMessage = "Gallery unavailable.";
+            var albumId = window.location.href.slice(window.location.href.locationOf("/gallery/") + 9);
+            var requestUrl = "https://api.imgur.com/3/gallery/album/";
+            var errorMessage = "Gallery unavailable.";
         }else{
-           var requestUrl = "https://api.imgur.com/3/album/";
-           var errorMessage = "Album unavailable.";
+            var albumId = window.location.href.slice(window.location.href.locationOf("/a/") + 3);
+            var requestUrl = "https://api.imgur.com/3/album/";
+            var errorMessage = "Album unavailable.";
         }
         
         
