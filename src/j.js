@@ -156,12 +156,22 @@ function resizeImage(){
 
 function setupPage(){
     
+    //Do different stuff for gallery
     if(window.location.href.indexOf("/a/") != -1 || window.location.href.indexOf("/gallery/") != -1){
         
+        //Update code as there might be stuff after the album/gallery id.
         if(window.location.href.slice(-1) == "/"){
             var albumId = window.location.href.slice(-6,-1);
         }else{
             var albumId = window.location.href.slice(-5);
+        }
+        
+        if(window.location.href.indexOf("/gallery/") != -1){
+           var requestUrl = "http://api.imgur.com/3/gallery/album/";
+           var errorMessage = "Gallery unavailable.";
+        }else{
+           var requestUrl = "https://api.imgur.com/3/album/";
+           var errorMessage = "Album unavailable.";
         }
         
         
@@ -175,13 +185,12 @@ function setupPage(){
                 }
                 setImageIndex(1);
             }else if (albumRequest.readyState == 4 && albumRequest.status != 200) {
-                document.title = "Album unavailable.";
-                document.getElementById("title").innerHTML = "Album unavailable.";
+                document.title = errorMessage;
+                document.getElementById("title").innerHTML = errorMessage;
                 document.getElementById("imageTableData").innerHTML = " ";
             }
-            //Add failed to get album.
         };
-        albumRequest.open("GET", "https://api.imgur.com/3/album/" + albumId , true);
+        albumRequest.open("GET", requestUrl + albumId , true);
         albumRequest.setRequestHeader("Authorization", "Client-ID " + getApiClientId());
         albumRequest.send();
 
