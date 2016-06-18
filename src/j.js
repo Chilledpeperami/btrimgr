@@ -164,11 +164,11 @@ function setupPage(){
     if(window.location.href.includes("/a/") || window.location.href.includes("/gallery/")){
         
         if(window.location.href.includes("/gallery/")){
-            var albumId = window.location.href.slice(window.location.href.locationOf("/gallery/") + 9);
+            var albumId = window.location.href.slice(window.location.href.indexOf("/gallery/") + 9);
             var requestUrl = "https://api.imgur.com/3/gallery/album/";
             var errorMessage = "Gallery unavailable.";
         }else{
-            var albumId = window.location.href.slice(window.location.href.locationOf("/a/") + 3);
+            var albumId = window.location.href.slice(window.location.href.indexOf("/a/") + 3);
             var requestUrl = "https://api.imgur.com/3/album/";
             var errorMessage = "Album unavailable.";
         }
