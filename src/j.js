@@ -156,6 +156,8 @@ function resizeImage(){
 
 function setupPage(){
     
+    location.replace(document.location.href.replace(location.hash , "" )); 
+    
     //Do different stuff for gallery
     if(window.location.href.indexOf("/a/") != -1 || window.location.href.indexOf("/gallery/") != -1){
         
