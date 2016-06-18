@@ -167,7 +167,7 @@ function setupPage(){
         }
         
         if(window.location.href.indexOf("/gallery/") != -1){
-           var requestUrl = "http://api.imgur.com/3/gallery/album/";
+           var requestUrl = "https://api.imgur.com/3/gallery/album/";
            var errorMessage = "Gallery unavailable.";
         }else{
            var requestUrl = "https://api.imgur.com/3/album/";
