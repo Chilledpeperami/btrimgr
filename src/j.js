@@ -165,7 +165,7 @@ function setupPage(){
         
         if(window.location.href.includes("/gallery/")){
             var albumId = window.location.href.slice(window.location.href.indexOf("/gallery/") + 9);
-            var requestUrl = "https://api.imgur.com/3/gallery/album/";
+            var requestUrl = "https://api.imgur.com/3/gallery/";
             var errorMessage = "Gallery unavailable.";
         }else{
             var albumId = window.location.href.slice(window.location.href.indexOf("/a/") + 3);
