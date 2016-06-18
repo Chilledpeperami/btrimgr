@@ -156,10 +156,12 @@ function resizeImage(){
 
 function setupPage(){
     
-    location.replace(document.location.href.replace(location.hash , "" )); 
+    if(window.location.href.includes("#")){
+        location.replace(document.location.href.replace(location.hash , "" )); 
+    }
     
     //Do different stuff for gallery
-    if(window.location.href.indexOf("/a/") != -1 || window.location.href.indexOf("/gallery/") != -1){
+    if(window.location.href.includes("/a/") || window.location.href.includes("/gallery/")){
         
         //Update code as there might be stuff after the album/gallery id.
         if(window.location.href.slice(-1) == "/"){
@@ -168,7 +170,7 @@ function setupPage(){
             var albumId = window.location.href.slice(-5);
         }
         
-        if(window.location.href.indexOf("/gallery/") != -1){
+        if(window.location.href.includes("/gallery/")){
            var requestUrl = "https://api.imgur.com/3/gallery/album/";
            var errorMessage = "Gallery unavailable.";
         }else{
