@@ -7,6 +7,10 @@ cp "../src/index.html" "../bin/release"
 rm "../bin/release/static/index.html"
 cp "../lib/snuownd.js" "../bin/release/static"
 
+awk -v f="../../keys" 'BEGIN {while (getline < f) txt=txt $0 ""} /putClientKeysHere/ {sub("putClientKeysHere", txt)} 1' "../bin/release/static/j.js" > "../bin/release/static/temp.js"
+rm "../bin/release/static/j.js"
+mv "../bin/release/static/temp.js" "../bin/release/static/j.js"
+
 java -jar "../lib/buildlibs/closureCompiler.jar" --js "../bin/release/static/j.js" --js_output_file "../bin/release/static/j_compiled.js"
 rm "../bin/release/static/j.js"
 mv "../bin/release/static/j_compiled.js" "../bin/release/static/j.js"

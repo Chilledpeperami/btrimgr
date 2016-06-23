@@ -1,5 +1,5 @@
 "use strict";
-var apiClientIds = ["82f991a3e8e7949"];
+var apiClientIds = [putClientKeysHere];
 var loadingImageURI = "/static/img/loading.gif";
 
 var album;
