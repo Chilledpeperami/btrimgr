@@ -2,12 +2,12 @@
 
 A web-based Imgur viewer, made to be as minimal as possible for speed and scalabilty.
 
-##Requirements
+## Requirements
 * Http server setup to return same html irrelevant of path except when path starts with /static.
 * Imgur API keys.
 * Java to minify sources.
 
-##Deployment
+## Deployment
 1. Download/checkout master branch zip from github.
 2. Packaging and placement of api keys:
   1. The keys should be put in a text file called "keys" in the format of: "key1","key2","key3"
