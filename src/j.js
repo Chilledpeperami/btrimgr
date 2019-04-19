@@ -11,10 +11,12 @@ var currentlyLoading = false;
 var imageWidth;
 var imageHeight;
 
+//Select a client ID randomly from the array.
 function getApiClientId(){
     return apiClientIds[Math.floor(Math.random() / (1 / apiClientIds.length))];
 }
 
+//Set the arrow's brightness to indicated to the user if the button will do anything.
 function setArrows(){
     if(currentImage == -1){
         document.getElementById("leftArrowImage").src = "/static/img/leftArrowDisabled.svg";
@@ -26,6 +28,7 @@ function setArrows(){
     }
 }
 
+//The function to change the current image being display. This function takes 0 to move backward, 1 to stay at the same image, 2 to move forward.
 function setImageIndex(direction){
     if(direction == 0){
         if(currentImage <= -1){
@@ -48,8 +51,10 @@ function setImageIndex(direction){
     presentImage();
 }
 
+//Set the dressing around the page to match the particular image, or cover and calls setupImage with the URL to specifically setup the image.
 function presentImage(){
     if(currentImage == -1){
+        //Sets cover image, album title and album description.
         if(false){
             setupImage("/static/img/nsfw.svg");
         }else{
@@ -58,12 +63,14 @@ function presentImage(){
         document.getElementById("title").innerHTML = spaceIfNull(album.title) + "<small><small><small><small><small><a href='https://imgur.com/a/" + album.id + "/zip'> Album zip download link.</a></small></small></small></small></small>";
         document.getElementById("description").innerHTML = SnuOwnd.getParser().render(spaceIfNull(album.description));
     }else{
+        //Sets appropriate image, image title and image description.
         setupImage(album.images[currentImage].link);
         document.getElementById("title").innerHTML = spaceIfNull(album.images[currentImage].title);
         document.getElementById("description").innerHTML = SnuOwnd.getParser().render(spaceIfNull(album.images[currentImage].description));
     }
 }
 
+//Displays the image needed, with loading and proper scaling.
 function setupImage(imageURI){
     var imageIndex = currentImage;
     document.getElementById("imageDisplay").style.display = "block";
@@ -91,6 +98,8 @@ function setupImage(imageURI){
     }
 }
 
+
+//Starts loading the next 5 images of an album succesively for better user experience.
 function aggressiveLoading(){
     if(loadedImage < album.images_count && loadedImage < (currentImage + 5)){
         if(album.images[loadedImage].link.slice(album.images[loadedImage].link.lastIndexOf(".")) == ".gif"){
@@ -109,6 +118,7 @@ function aggressiveLoading(){
     }
 }
 
+//Listens for keyboard events, and call setImageIndex to move the album appropriately.
 function manageKeyEvent(eventIn){
     if(eventIn.keyCode == 37){
         //Do stuff when left key is pressed.
@@ -120,6 +130,7 @@ function manageKeyEvent(eventIn){
     
 }
 
+//Looks at the area available to display the image and sizes the image to fit.
 function resizeImage(){
     imageHeight = document.getElementById("imageHolderHeight").offsetHeight;
     imageWidth = document.getElementById("imageHolderWidth").offsetWidth;
@@ -154,8 +165,36 @@ function resizeImage(){
     
 }
 
+function spaceIfNull(stringIn){
+    if(stringIn == null){
+        return " ";
+    }else{
+        return stringIn;
+    }
+}
+
+//Function to get the natural width of video or picture.
+function getWidth(contentIn){
+    if(contentIn.videoWidth){
+        return contentIn.videoWidth;
+    }else{
+        return contentIn.naturalWidth;
+    }
+}
+
+//Function to get the natural height of video or picture.
+function getHeight(contentIn){
+    if(contentIn.videoHeight){
+        return contentIn.videoHeight;
+    }else{
+        return contentIn.naturalHeight;
+    }
+}
+
+//Called when the page is loaded for initial setup.
 function setupPage(){
     
+    //Remove any hashes in the URL.
     if(window.location.href.includes("#")){
         location.replace(document.location.href.replace(location.hash , "" )); 
     }
@@ -200,32 +239,6 @@ function setupPage(){
         document.getElementById("albumViewer").style.display = "none";
         document.getElementById("homePage").style.display = "block";
         document.getElementById("baseTag").target = "_self";
-    }
-}
-
-function spaceIfNull(stringIn){
-    if(stringIn == null){
-        return " ";
-    }else{
-        return stringIn;
-    }
-}
-
-//Function to get the natural width of video or picture.
-function getWidth(contentIn){
-    if(contentIn.videoWidth){
-        return contentIn.videoWidth;
-    }else{
-        return contentIn.naturalWidth;
-    }
-}
-
-//Function to get the natural height of video or picture.
-function getHeight(contentIn){
-    if(contentIn.videoHeight){
-        return contentIn.videoHeight;
-    }else{
-        return contentIn.naturalHeight;
     }
 }
 
