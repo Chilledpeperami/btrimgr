@@ -50,12 +50,12 @@ function setImageIndex(direction){
 
 function presentImage(){
     if(currentImage == -1){
-        if(album.nsfw){
+        if(false){
             setupImage("/static/img/nsfw.svg");
         }else{
-            setupImage("http://i.imgur.com/" + album.cover + "h.png");
+            setupImage("https://i.imgur.com/" + album.cover + "h.png");
         }
-        document.getElementById("title").innerHTML = spaceIfNull(album.title) + "<small><small><small><small><small><a href='http://imgur.com/a/" + album.id + "/zip'> Album zip download link.</a></small></small></small></small></small>";
+        document.getElementById("title").innerHTML = spaceIfNull(album.title) + "<small><small><small><small><small><a href='https://imgur.com/a/" + album.id + "/zip'> Album zip download link.</a></small></small></small></small></small>";
         document.getElementById("description").innerHTML = SnuOwnd.getParser().render(spaceIfNull(album.description));
     }else{
         setupImage(album.images[currentImage].link);
