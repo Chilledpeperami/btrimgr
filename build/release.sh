@@ -5,6 +5,8 @@ mkdir "../bin/release/static"
 cp -r "../src/." "../bin/release/static"
 cp "../src/index.html" "../bin/release"
 rm "../bin/release/static/index.html"
+cp "../src/_redirects" "../bin/release"
+rm "../bin/release/static/_redirects"
 cp "../lib/snuownd.js" "../bin/release/static"
 
 awk -v f="../../keys" 'BEGIN {while (getline < f) txt=txt $0 ""} /putClientKeysHere/ {sub("putClientKeysHere", txt)} 1' "../bin/release/static/j.js" > "../bin/release/static/temp.js"
