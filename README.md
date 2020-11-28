@@ -5,7 +5,8 @@ A web-based Imgur viewer, made to be as minimal as possible for speed and scalab
 ## Requirements
 * Http server setup to return same html irrelevant of path except when path starts with /static.
 * Imgur API keys.
-* Java to minify sources.
+* Java for Closurecompiler.
+* [html-minifier](https://github.com/kangax/html-minifier) installed.
 
 ## Deployment
 1. Download/checkout master branch zip from github.

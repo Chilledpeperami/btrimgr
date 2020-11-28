@@ -19,6 +19,6 @@ java -jar "../lib/buildlibs/closure-compiler-v20201102.jar" --js "../bin/release
 rm "../bin/release/static/snuownd.js"
 mv "../bin/release/static/snuownd_compiled.js" "../bin/release/static/snuownd.js"
 
-java -jar "../lib/buildlibs/htmlcompressor-1.5.3.jar" "../bin/release/index.html" > "../bin/release/compressed.html"
+html-minifier --collapse-boolean-attributes --collapse-inline-tag-whitespace --collapse-whitespace --decode-entities --minify-css --minify-urls --remove-comments "../bin/release/index.html" -o "../bin/release/minified.html"
 rm "../bin/release/index.html"
-mv "../bin/release/compressed.html" "../bin/release/index.html"
+mv "../bin/release/minified.html" "../bin/release/index.html"
