@@ -24,3 +24,9 @@ mv "../bin/release/static/snuownd_compiled.js" "../bin/release/static/snuownd.js
 html-minifier --collapse-boolean-attributes --collapse-inline-tag-whitespace --collapse-whitespace --decode-entities --minify-css --minify-urls --remove-comments "../bin/release/index.html" -o "../bin/release/minified.html"
 rm "../bin/release/index.html"
 mv "../bin/release/minified.html" "../bin/release/index.html"
+
+sed -i 's|src="/static/j.js">|>\nreplaceJavascriptHerePlease\n|g' "../bin/release/index.html"
+awk 'NR==FNR { a[n++]=$0; next } /replaceJavascriptHerePlease/ { for (i=0;i<n;++i) print a[i]; next }1' "../bin/release/static/j.js" "../bin/release/index.html" > "../bin/release/index.html.temp"
+rm "../bin/release/index.html"
+mv "../bin/release/index.html.temp" "../bin/release/index.html"
+rm "../bin/release/static/j.js"
