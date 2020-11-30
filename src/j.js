@@ -60,12 +60,12 @@ function presentImage(){
             setupImage("https://i.imgur.com/" + album.cover + "h.png");
         }
         document.getElementById("title").innerHTML = spaceIfNull(album.title) + "<small><small><small><small><small><a href='https://imgur.com/a/" + album.id + "/zip'> Album zip download link.</a></small></small></small></small></small>";
-        document.getElementById("description").innerHTML = SnuOwnd.getParser().render(spaceIfNull(album.description));
+        document.getElementById("description").innerHTML = marked(album.description);
     }else{
         //Sets appropriate image, image title and image description.
         setupImage(album.images[currentImage].link);
         document.getElementById("title").innerHTML = spaceIfNull(album.images[currentImage].title);
-        document.getElementById("description").innerHTML = SnuOwnd.getParser().render(spaceIfNull(album.images[currentImage].description));
+        document.getElementById("description").innerHTML = marked(album.images[currentImage].description);
     }
 }
 
